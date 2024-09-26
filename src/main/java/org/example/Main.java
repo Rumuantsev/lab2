@@ -2,10 +2,12 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
+        /*
         Balanace balanace = new Balanace();
         balanace.addLeft(3);
         balanace.addRight(4);
-        System.out.println(balanace.result());
+        System.out.println(balanace.result());*/
+        Bell.sound(2);
     }
 }
 
@@ -38,6 +40,15 @@ class Balanace{
             return "R";
         } else{
             return "L";
+        }
+    }
+}
+
+class Bell{
+    static void sound(int count){
+        for(int i = 0; i < count; ++i){
+            System.out.print("ding");
+            System.out.println(" dong");
         }
     }
 }

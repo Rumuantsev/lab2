@@ -1,27 +1,32 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.example.geometry2d.Circle;
+import org.example.geometry2d.Rectangle;
+import static java.lang.Math.pow;
+
 
 public class Main {
     public static void main(String[] args) {
+        /*Button button = new Button();
+        button.click();
+        button.click();
+        button.click();*/
+
         /*
         Balanace balanace = new Balanace();
         balanace.addLeft(3);
         balanace.addRight(4);
         System.out.println(balanace.result());*/
+
         //Bell.sound(2);
+
         /*Integer[] inputArray = {1, 2, 3, 4, 5, 6};
         ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(inputArray));
         OddEvenSeparator numbers = new OddEvenSeparator(arrayList);
         numbers.addNumber(2);
         System.out.print(numbers.even());
         System.out.print(numbers.odd());*/
-        /*Button button = new Button();
-        button.click();
-        button.click();
-        button.click();*/
 
         /*Table table = new Table(2, 2);
         table.setValue(0,0,1);
@@ -31,7 +36,11 @@ public class Main {
         //System.out.print(table.average());
         System.out.print(table.toString());*/
 
+        /*Circle circle = new Circle(2);
+        System.out.print(circle.toString());*/
 
+        /*Rectangle rectangle = new Rectangle(2);
+        System.out.print(rectangle.area());*/
     }
 }
 

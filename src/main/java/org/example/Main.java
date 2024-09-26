@@ -3,6 +3,8 @@ package org.example;
 import java.util.ArrayList;
 import org.example.geometry2d.Circle;
 import org.example.geometry2d.Rectangle;
+import org.example.geometry3d.Cylinder;
+
 import static java.lang.Math.pow;
 
 
@@ -41,6 +43,10 @@ public class Main {
 
         /*Rectangle rectangle = new Rectangle(2);
         System.out.print(rectangle.area());*/
+
+        /*Cylinder cylinder = new Cylinder(2, 4);
+        System.out.print(cylinder.volume());*/
+
     }
 }
 

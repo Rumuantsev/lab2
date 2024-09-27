@@ -4,5 +4,4 @@ public interface Figure {
     double area();
 
     String toString();
-
 }

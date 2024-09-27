@@ -1,11 +1,19 @@
 package org.example.geometry2d;
 
 import static java.lang.Math.pow;
+import org.example.Exception.RadiusException;
 
 public class Circle implements Figure {
     private double radius;
-    public Circle(double radius){
-        this.radius=radius;
+    public Circle(double radius) {
+        try {
+            if (radius <= 0){
+                throw new RadiusException("Radius must be > 0!");
+            }
+            this.radius=radius;
+        } catch (RadiusException e){
+            System.err.print("Exception: " + e.getMessage());
+        }
     }
 
     @Override
@@ -16,6 +24,6 @@ public class Circle implements Figure {
 
     @Override
     public String toString() {
-        return "Radius: " + String.valueOf(this.radius) + "\nArea: " + String.valueOf(this.area());
+        return "Radius: " + this.radius + "\nArea: " + this.area();
     }
 }

@@ -1,56 +1,105 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+import org.example.Exception.HeightException;
+import org.example.Exception.RadiusBaseException;
 import org.example.geometry2d.Circle;
 import org.example.geometry2d.Rectangle;
 import org.example.geometry3d.Cylinder;
 
-import static java.lang.Math.pow;
 
-
-public class Main {
+public  class Main {
     public static void main(String[] args) {
-        /*Button button = new Button();
-        button.click();
-        button.click();
-        button.click();*/
+        System.out.println(" ");
+        System.out.println("0: Exit;");
+        System.out.println("1-5: Ex1-Ex5;");
+        System.out.println("6-8: Circle, Rectangle, Cylinder;");
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            System.out.println(" ");
+            System.out.print("Input: ");
+            int ex = in.nextInt();
 
-        /*
-        Balanace balanace = new Balanace();
-        balanace.addLeft(3);
-        balanace.addRight(4);
-        System.out.println(balanace.result());*/
+            switch (ex) {
+                case 0:
+                    return;
+                case 1:
+                    Button button = new Button();
+                    System.out.print("Input count click: ");
+                    int clickCount = in.nextInt();
+                    for(int i = 0; i < clickCount; ++i){
+                        button.click();
+                    }
+                    continue;
+                case 2:
+                    Balance balance = new Balance();
+                    System.out.print("Input left: ");
+                    int left = in.nextInt();
+                    balance.addLeft(left);
+                    System.out.print("Input right: ");
+                    int right = in.nextInt();
+                    balance.addRight(right);
+                    System.out.print("Result: ");
+                    System.out.println(balance.result());
+                    continue;
+                case 3:
+                    System.out.print("Input count sound: ");
+                    int count = in.nextInt();
+                    Bell.sound(count);
+                    continue;
+                case 4:
+                    OddEvenSeparator numbers = new OddEvenSeparator();
+                    numbers.addNumber(2);
+                    numbers.addNumber(1);
+                    numbers.addNumber(3);
+                    numbers.addNumber(4);
+                    numbers.addNumber(5);
+                    System.out.print("Even: ");
+                    System.out.println(numbers.even());
+                    System.out.print("Odd: ");
+                    System.out.println(numbers.odd());
+                    continue;
+                case 5:
+                    Table table = new Table(2, 2);
+                    table.setValue(0,0,1);
+                    table.setValue(0,1,2);
+                    table.setValue(1,0,3);
+                    table.setValue(1,1,4);
+                    System.out.print("Average: ");
+                    System.out.println(table.average());
+                    System.out.print("ToSting: ");
+                    System.out.println(table.toString());
 
-        //Bell.sound(2);
-
-        /*Integer[] inputArray = {1, 2, 3, 4, 5, 6};
-        ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(inputArray));
-        OddEvenSeparator numbers = new OddEvenSeparator(arrayList);
-        numbers.addNumber(2);
-        System.out.print(numbers.even());
-        System.out.print(numbers.odd());*/
-
-        /*Table table = new Table(2, 2);
-        table.setValue(0,0,1);
-        table.setValue(0,1,2);
-        table.setValue(1,0,3);
-        table.setValue(1,1,4);
-        //System.out.print(table.average());
-        System.out.print(table.toString());*/
-
-        /*Circle circle = new Circle(2);
-        System.out.print(circle.toString());*/
-
-        /*Rectangle rectangle = new Rectangle(2);
-        System.out.print(rectangle.area());*/
-
-        /*Cylinder cylinder = new Cylinder(2, 4);
-        System.out.print(cylinder.volume());*/
+                    continue;
+                case 6:
+                    Circle circle = new Circle(2);
+                    System.out.print(circle.area());
+                    continue;
+                case 7:
+                    Rectangle rectangle = new Rectangle(2);
+                    System.out.print(rectangle);
+                    continue;
+                case 8:
+                    try {
+                        Cylinder cylinder = new Cylinder(2, 4); // Вызов конструктора
+                        System.out.print("Volume: ");
+                        System.out.println(cylinder.volume());
+                    } catch (RadiusBaseException | HeightException e) {
+                        System.err.println("Exception: " + e.getMessage());
+                    }
+                    continue;
+            }
+            in.close();
+        }
 
     }
 }
 
-class Button {
+ class Button {
 
     private int clickCount;
 
@@ -60,22 +109,22 @@ class Button {
 
     // Метод для увеличения количества нажатий
     public void click() {
-        clickCount++;
+        ++clickCount;
         System.out.println("Count click: " + clickCount);
     }
 
 }
 
-class Balanace{
+class Balance {
     private int left;
     private int right;
 
-    Balanace(){
+    Balance(){
         this.left = 0;
         this.right = 0;
     }
 
-    Balanace(int left, int right){
+    Balance(int left, int right){
         this.left = left;
         this.right = right;
     }
@@ -109,18 +158,22 @@ class Bell{
 }
 
 class OddEvenSeparator{
-    private ArrayList<Integer> numbers = new ArrayList<>();
-    OddEvenSeparator(ArrayList<Integer> inputNumbers){
-        for(int i = 0; i < inputNumbers.size(); ++i){
-            this.numbers.add(inputNumbers.get(i));
-        }
+    private final List<Integer> numbers = new LinkedList<>();
+
+    OddEvenSeparator(List<Integer> inputNumbers){
+        this.numbers.addAll(inputNumbers);
     }
+
+    OddEvenSeparator(){
+
+    }
+
     public void addNumber(int inputNumber){
         this.numbers.add(inputNumber);
     }
 
-    public ArrayList<Integer> even(){
-        ArrayList<Integer> result = new ArrayList<>();
+    public List<Integer> even(){
+        List<Integer> result = new ArrayList<>();
         for(int i = 0; i < this.numbers.size(); ++i){
             if(this.numbers.get(i) % 2 == 0){
                 result.add(this.numbers.get(i));
@@ -141,9 +194,9 @@ class OddEvenSeparator{
 }
 
 class Table {
-    private int[][] table;
-    private int rows;
-    private int cols;
+    private final int[][] table;
+    private final int rows;
+    private final int cols;
 
     Table(int rows, int cols) {
         this.rows = rows;
@@ -168,14 +221,14 @@ class Table {
     }
 
     public String toString() {
-        String result = "";
-        for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table[i].length; j++) {
-                result += String.valueOf(table[i][j]);
-                result += " ";
+        StringBuilder result = new StringBuilder();
+        for (int[] ints : table) {
+            for (int anInt : ints) {
+                result.append(anInt);
+                result.append(" ");
             }
         }
-        return result;
+        return result.toString();
     }
 
     public double average() {
@@ -187,8 +240,7 @@ class Table {
                 ++count;
             }
         }
-        double result = (double) sum / count;
-        return result;
+        return (double) sum / count;
     }
 }
 
